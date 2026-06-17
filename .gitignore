@@ -1,0 +1,23 @@
+# Data files - do not publish raw or cleaned market data
+data/raw/*
+data/clean/*
+
+# Keep folder placeholders / documentation
+!data/raw/.gitkeep
+!data/clean/.gitkeep
+!data/README.md
+
+# Python artifacts
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Environments and secrets
+.env
+.venv/
+venv/
+
+# Local/editor/system files
+.DS_Store
+Thumbs.db
+.vscode/
