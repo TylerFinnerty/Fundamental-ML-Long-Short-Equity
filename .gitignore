@@ -1,10 +1,16 @@
 # Data files - do not publish raw or cleaned market data
-data/raw/*
 data/clean/*
+data/raw/*
+
 
 # Keep folder placeholders / documentation
-!data/raw/.gitkeep
 !data/clean/.gitkeep
+!data/raw/.gitkeep
+!data/raw/10Q_folder.gitkeep
+!data/raw/10Q_folder/subfolders/.gitkeep
+!data/raw/10Q_folder/zips/.gitkeep
+!data/raw/price_batches/.gitkeep
+!results/.gitkeep
 !data/README.md
 
 # Python artifacts
