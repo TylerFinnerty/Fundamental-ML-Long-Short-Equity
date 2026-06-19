@@ -15,6 +15,23 @@ Can machine learning models trained on lagged 10-Q fundamentals data and histori
 
 
 ## Data
+The final modeling dataset was constructed from the following four sources:
+
+1. Financial Filings (10-Q) <br>
+   Source: [SEC](https://www.sec.gov/data-research/sec-markets-data/financial-statement-data-sets) <br>
+   Description: Quarterly company fundamental data extracted from SEC 10-Q filings, including income statement, balance sheet, and cash flow statement fields used to construct model features.
+
+2. Standard Industrial Classification Codes (SIC Codes) <br>
+   Source: [SEC](https://www.sec.gov/search-filings/standard-industrial-classification-sic-code-list) <br>
+   Description: Industry classification data used as a categorial feature in the modeling phase and may eventually be used as a filter for L/S stocks of the same industry.
+
+3. Historical Stock Prices <br>
+   Source: [Yahoo Finance](https://finance.yahoo.com/) using the [yFinance](https://pypi.org/project/yfinance/) package <br>
+   Description: Historical price data used to create price-based features and the binary target variable indicating whether a stock rose or fell over the following three-month period.
+
+4. Market Capitalization Data <br>
+   Source: [Stock Analysis](https://stockanalysis.com/list/biggest-companies/) <br>
+   Description: Company market capitalization data used to support filtering during data cleaning and feature engineering.
 
 ## Methodology
 
