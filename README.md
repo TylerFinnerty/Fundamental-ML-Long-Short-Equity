@@ -11,8 +11,21 @@ Future work would extend these model outputs into a formal long/short portfolio 
 ## Research Question
 Can machine learning models trained on lagged 10-Q fundamentals data and historical price features generate predictive buy/sell signals for three-month stock returns?
 
-## Project Preview / Key Results
+## Key Results
+The best model so far is an XGBoost classifier. It predicts whether a stock's return over the next three months will be positive or negative based on lagged company fundamentals and historical price features.
 
+<p align="center">
+  <img src="results/xgb_roc_auc_curve.png" alt="XGBoost ROC AUC Curve" width="650">
+</p>
+
+<p align="center">
+  <img src="results/xgb_confusion_matrix.png" alt="XGBoost Confusion Matrix" width="520">
+</p>
+
+- The model scored 0.62 on ROC-AUC, modestly better than randomly guessing.
+- The confusion matrix shows it can pick out both positive and negative return cases, but it still gets a meaningful number wrong.
+- These numbers only measure how good the classifier is at separating the two classes. They don't tell us how a long/short portfolio built on these predictions would actually perform
+- Returns, drawdowns, and risk-adjusted metrics are still on the to-do list.
 
 ## Data
 Raw and cleaned datasets are not included in this repository due to licensing, redistribution, and file-size considerations.
