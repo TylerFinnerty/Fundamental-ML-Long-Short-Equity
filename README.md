@@ -125,3 +125,7 @@ Run both notebooks from inside the `src/` folder so the relative paths work corr
 - **Matplotlib / Seaborn**: Used to generate charts and visualize model results
 
 ## Limitations and Future Work
+- This project only evaluates classification performance. A full long/short portfolio backtest is still needed to measure actual returns, drawdowns, and risk-adjusted performance.
+- Several financial statement fields that could have helped (e.g., CapEx, and FCF) were too sparse to use, which limited the final feature set.
+- The final model beats random guessing, but it still produces a meaningful number of false positives and false negatives.
+- The original five-class target was too granular for the available data and produced weak results, so the project was narrowed down to binary buy/sell classification. 
