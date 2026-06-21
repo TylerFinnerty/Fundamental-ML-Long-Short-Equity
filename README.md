@@ -50,6 +50,46 @@ This project used four datasets:
 
 ## Methodology
 
+### SEC Data Filtering and Cleaning
+- Reduced the raw SEC financial statement dataset (~80 million rows) down to what was needed for analysis by:
+   1. Keeping only rows representing grand totals, excluding subtotal rows
+   2. Filtering to the tags relevant to the analysis (e.g., "Revenue", "OperatingIncomeLoss")
+- Filtered the dataset to contain only unique ticker-tag-date-qtrs column combinations to avoid the duplicative rows that arise from YoY comparisons in subsequent 10-Q statements.
+
+### SEC Missing Value Handling
+- Combined related fields that describe the same data but under different labels (e.g., "Revenues" and "RevenuesFrom...Customer...").
+- Reconstructed missing values for derivable features where possible (e.g., using COGS, R&D, SG&A, and D&A columns to populate "TopLineRevenue" and "OperatingIncome").
+- Used linear interpolation to fill in remaining gaps on a company-by-company basis because their high level fundamentals shouldn't vary much from quarter to quarter.
+- Dropped features with >50% missingness.
+- Dropped the remaining handful of rows that contained a missing value.
+- Removed any stocks with fewer than 20 observations. The final dataset contained 1,011 unique tickers spanning 179 months.
+- Pivoted SEC financial statement tags into feature columns indexed by ticker and date.
+
+### Dataset Joining and Target Creation
+- Collected monthly Yahoo Finance price data by ticker, and saved local price files.
+- Joined SEC financials with Yahoo Finance data, SEC SIC codes, and Stock Analysis market cap data to create one unified dataset enabling feature engineering and target variable creation.
+- Created a five-category target variable before realizing that it spreads the data too thin. Revised this to a two-category target, 1 for when a stock has gone up in the following three months, and 0 for when it's down.
+
+### Exploratory Data Analysis
+- Identified very poor linear correlation of features with five-category target variable. This eventually informed the decision to drop to a two-category target.
+
+### Feature Engineering
+- Consolidated similar industry categories (e.g., "Finance" with "Finance or...Crypto Assets") to decrease cardinality for modeling.
+- Built temporal features to show how fundamentals change quarter to quarter, careful not to leak future information to avoid look-ahead bias:
+   - Lagged versions of fundamental variables
+   - Three-period moving averages
+   - Period-over-period changes in fundamentals and ratios
+- Tested ticker encoding approaches to represent company-specific effects without relying only on raw ticker labels.
+- Kept the financial ratio features. While they  didn't add much on their own, they normalize for company size and made business sense to include.
+
+
+### Model Selection
+- Compared Logistic Regression, Decision Tree, Random Forest, and XGBoost using a fixed time-based train/test split.
+- Used F1 score to compare models because a long/short portfolio wants to correctly select from both the positive and negative classes.
+- Selected XGBoost for the final stage because it performed competitively while running faster than Random Forest.
+- Tested the final XGBoost model using an iterative walk-forward approach, where the model predicted the next period and was then retrained with newly available data.
+- Looked at confusion matrices, precision, and recall alongside F1, since the type of error matters for stock selection, not just the overall score.
+
 ## Repository Structure
 ```text
 .
@@ -72,7 +112,7 @@ The pipeline runs through two notebooks in `src/`:
 1. `01_sec_fundamentals_master_creation.ipynb` builds the cleaned SEC fundamentals file from the SEC quarterly ZIP files you download manually.
 2. `02_full_project_report.ipynb` combines those fundamentals with Yahoo Finance price data, builds the final modeling files, and runs the analysis, modeling, and results.
 
-Run both notebooks from inside the `src/` folder so the relative paths work correctly. Raw and cleaned data aren't committed to the repo — see `data/README.md` for the folder layout, manual downloads, and files each notebook generates.
+Run both notebooks from inside the `src/` folder so the relative paths work correctly. Raw and cleaned data aren't committed to the repo. (See `data/README.md` for the folder layout, manual downloads, and files each notebook generates).
 
 ## Technologies Used
 
