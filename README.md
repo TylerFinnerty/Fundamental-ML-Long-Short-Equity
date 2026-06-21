@@ -51,6 +51,18 @@ This project used four datasets:
 ## Methodology
 
 ## Repository Structure
+```text
+.
+├── data/
+│   ├── README.md                         # Data download instructions and expected folder layout
+│   ├── raw/                              # Raw SEC, price, and market cap files (not committed)
+│   └── clean/                            # Cleaned modeling datasets (not committed)
+├── results/                              # Model result figures used in the README
+├── src/
+│   ├── 01_sec_fundamentals_master_creation.ipynb
+│   └── 02_full_project_report.ipynb
+├── README.md
+└── requirements.txt
 
 ## Reproducing the Project
 The reproducible pipeline uses two notebooks in `src/`:
@@ -59,6 +71,7 @@ The reproducible pipeline uses two notebooks in `src/`:
 2. `02_full_project_report.ipynb` combines fundamentals with Yahoo Finance price data, creates the final modeling files, and runs the analysis, modeling, results, and conclusion.
 
 Run the notebooks from the `src/` folder so the relative paths resolve correctly. Raw and cleaned data files are not committed to the repository, so see `data/README.md` for the required folder layout, manual downloads, and generated outputs.
+```
 
 ## Technologies Used
 
