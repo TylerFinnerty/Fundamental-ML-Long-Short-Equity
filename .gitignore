@@ -27,6 +27,7 @@ data/raw/**
 results/**
 !results/
 !results/.gitkeep
+!results/*.png
 
 # Python artifacts
 __pycache__/
