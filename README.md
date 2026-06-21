@@ -2,9 +2,9 @@
 ### A machine learning research project that uses company fundamentals and price features to generate predictive buy/sell signals.
 
 ## Overview
-This project tests whether lagged company fundamentals from 10-Q filings combined with features derived from historical prices can be used to generate machine learning signals for three-month stock returns.
+This project tests whether lagged company fundamentals from 10-Q filings, combined with features built from historical prices, can generate a useful machine learning signal for three-month stock returns.
 
-Rather than attempting to forecast the entire market, the project frames the problem as a binary classification task: predicting whether an individual stock is more likely to rise or fall over the next three months. The current version focuses on evaluating the quality of these buy/sell classifications using model performance metrics.
+Rather than trying to forecast the whole market, the project treats this as a binary classification problem: will an individual stock go up or down over the next three months? Right now, the focus is on evaluating how good these classifications are, using standard model performance metrics.
 
 Future work would extend these model outputs into a formal long/short portfolio backtest, where positive signals are used as long candidates and negative signals are used as short candidates. This would allow the strategy to be evaluated against the S&P 500 benchmark using portfolio returns, drawdowns, and risk-adjusted performance metrics.
 
@@ -63,16 +63,25 @@ This project used four datasets:
 │   └── 02_full_project_report.ipynb
 ├── README.md
 └── requirements.txt
-
-## Reproducing the Project
-The reproducible pipeline uses two notebooks in `src/`:
-
-1. `01_sec_fundamentals_master_creation.ipynb` builds the cleaned SEC fundamentals file from manually downloaded SEC quarterly ZIP files.
-2. `02_full_project_report.ipynb` combines fundamentals with Yahoo Finance price data, creates the final modeling files, and runs the analysis, modeling, results, and conclusion.
-
-Run the notebooks from the `src/` folder so the relative paths resolve correctly. Raw and cleaned data files are not committed to the repository, so see `data/README.md` for the required folder layout, manual downloads, and generated outputs.
 ```
 
+## Reproducing the Project
+
+The pipeline runs through two notebooks in `src/`:
+
+1. `01_sec_fundamentals_master_creation.ipynb` builds the cleaned SEC fundamentals file from the SEC quarterly ZIP files you download manually.
+2. `02_full_project_report.ipynb` combines those fundamentals with Yahoo Finance price data, builds the final modeling files, and runs the analysis, modeling, and results.
+
+Run both notebooks from inside the `src/` folder so the relative paths work correctly. Raw and cleaned data aren't committed to the repo — see `data/README.md` for the folder layout, manual downloads, and files each notebook generates.
+
 ## Technologies Used
+
+- **Python**: Main language for cleaning data, building features, and running the models
+- **Jupyter Notebook**: Used for analysis and reporting throughout the project
+- **pandas / NumPy**: Clean, reshape, and compute over the data
+- **scikit-learn**: Handles train/test splits, preprocessing, and model scoring
+- **XGBoost**: Gradient boosting model used for the final predictions
+- **yFinance**: Pulls historical stock price data
+- **Matplotlib / Seaborn**: Used to generate charts and visualize model results
 
 ## Limitations and Future Work
