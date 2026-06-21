@@ -31,9 +31,9 @@ data/
 
 **2. Ticker and market-cap data**
 - Get it from: https://stockanalysis.com/stocks/
-- Sign up for a free account and download the full dataset.
+- Create a free account and download the full dataset.
 - Save it as `data/clean/all_stock_tickers.xlsx`.
-- Make sure it has at least a `Symbol` column and a `Market Cap` column, the notebook needs both.
+- It needs at least a `Symbol` column and a `Market Cap` column for the notebook to run.
 
 **3. SIC code lookup**
 - Get it from: https://www.sec.gov/search-filings/standard-industrial-classification-sic-code-list
@@ -67,4 +67,4 @@ This notebook:
 
 - Run the notebooks from inside the `src/` folder. The relative paths (like `../data/clean/...`) assume that's your working directory.
 - Price data comes from Yahoo Finance via `yfinance`. If Yahoo updates its historical data or rate-limits you, your numbers might come out slightly different.
-- Building the SEC `num_master` file takes a while since it's a lot of data. That's also why it's saved as parquet instead of CSV.
+- Building the SEC `num_master` file takes a while since there's a lot of data. That's also why it's saved as parquet instead of CSV.
